@@ -35,17 +35,18 @@ defmodule StarterProject.User do
     hash = changeset
            |> get_field(:password)
            |> Comeonin.Bcrypt.hashpwsalt
-
+    
     changeset
-    |> put_change(:hash_password, hash)
+    |> put_change(:password_hash, hash)
   end
 
   def find_and_confirm_password(%{ "username" => username, "password" => password }) do 
     with user when not is_nil(user) <- Repo.get_by(StarterProject.User, username: username),
-      true <- Comeonin.Bcrypt.checkpw(password, user.password_hash) do
-        {:ok, user} 
-        else 
-          nil -> {:error, "Invalid email or password"}
-      end
+      true <- Comeonin.Bcrypt.checkpw(password, user.password_hash)
+    do
+      {:ok, user} 
+      else 
+        nil -> {:error, "Invalid email or password"}
+    end
   end
 end
