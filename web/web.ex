@@ -20,6 +20,7 @@ defmodule StarterProject.Web do
     quote do
       use Ecto.Schema
 
+      alias StarterProject.Repo
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
