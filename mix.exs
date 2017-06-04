@@ -37,6 +37,7 @@ defmodule StarterProject.Mixfile do
      {:gettext, "~> 0.11"},
      {:guardian, "~> 0.14"},
      {:comeonin, "~> 3.0"},
+     {:cors_plug, "~> 1.2"},
      {:cowboy, "~> 1.0"}]
   end
 

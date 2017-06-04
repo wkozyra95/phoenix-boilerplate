@@ -3,11 +3,8 @@ defmodule StarterProject.AuthController do
 
   alias StarterProject.User
 
-  plug :scrub_params, "username" when action in [:login, :register]
-  plug :scrub_params, "password" when action in [:login, :register]
-  plug :scrub_params, "email" when action in [:register]
 
-  def login(conn, %{ "username" => username, "password" => password } = params) do
+  def login(conn, %{} = params) do
     case User.find_and_confirm_password(params) do
       {:ok, user} ->
         IO.inspect params
@@ -25,7 +22,7 @@ defmodule StarterProject.AuthController do
     end
   end
 
-  def register(conn, %{ "username" => username, "password" => password, "email" => email } = user) do
+  def register(conn, %{} = user) do
     changeset = User.register_changeset %User{}, user
     case Repo.insert changeset do
       {:ok, user} -> 
@@ -35,7 +32,7 @@ defmodule StarterProject.AuthController do
       {:error, changeset} ->
         conn 
         |> put_status(400)
-        |> render("error.json", changeset_error: changeset)
+        |> render("error.json", changeset: changeset)
     end
   end
 

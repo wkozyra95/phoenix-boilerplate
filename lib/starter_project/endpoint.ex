@@ -36,5 +36,6 @@ defmodule StarterProject.Endpoint do
     key: "_starter_project_key",
     signing_salt: "JTK706Pz"
 
+  plug CORSPlug
   plug StarterProject.Router
 end

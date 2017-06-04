@@ -3,7 +3,7 @@ defmodule StarterProject.User do
 
   schema "user" do
     field :username, :string
-    field :password, :string, virtual: true
+    field :password, :string, virtual: true, default: ""
     field :password_hash, :string
     field :email, :string
 
@@ -47,6 +47,7 @@ defmodule StarterProject.User do
       {:ok, user} 
       else 
         nil -> {:error, "Invalid email or password"}
+        false -> {:error, "Invalid email or password"}
     end
   end
 end

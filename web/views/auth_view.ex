@@ -20,10 +20,14 @@ defmodule StarterProject.AuthView do
     %{ all: error }
   end
 
-  def render("error.json", %{ changeset_error: error }) do
-    Ecto.Changeset.traverse_errors(error, fn
+  def render("error.json", %{ changeset: error }) do
+    error
+    |> Ecto.Changeset.traverse_errors(fn
       {msg, opts} -> String.replace(msg, "%{count}", to_string(opts[:count]))
       msg -> msg
+    end)
+    |> Map.new(fn
+      {key, [head | _ ]} -> {key, head}
     end)
   end
 end
