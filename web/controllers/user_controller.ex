@@ -20,7 +20,7 @@ defmodule StarterProject.UserController do
       {:error, changeset} ->
         conn
         |> put_status(400)
-        |> render("error.json", changeset_error: changeset)
+        |> render("error.json", changeset: changeset)
     end
   end
 end

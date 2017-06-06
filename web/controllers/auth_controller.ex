@@ -35,5 +35,20 @@ defmodule StarterProject.AuthController do
         |> render("error.json", changeset: changeset)
     end
   end
-
+  
+  def change_password(conn, %{} = params) do
+    user = Guardian.Plug.current_resource(conn)
+    changeset = User.change_password_changeset user, params
+    case Repo.update changeset do
+      {:ok, user} ->
+        conn
+        |> put_status(201)
+        |> render("user.json", user: user)
+      {:error, changeset} -> 
+        conn
+        |> put_status(400)
+        |> render("error.json", changeset: changeset)
+    end
+  end
 end
+

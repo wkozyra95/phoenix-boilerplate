@@ -23,5 +23,6 @@ defmodule StarterProject.Router do
 
     get "/user", UserController, :show
     post "/user", UserController, :update
+    post "/auth/change_password", AuthController, :change_password
   end
 end
