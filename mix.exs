@@ -18,7 +18,7 @@ defmodule StarterProject.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {StarterProject, []},
-     applications: [:phoenix, :phoenix_pubsub, :cowboy, :logger, :gettext,
+     applications: [:phoenix, :phoenix_pubsub, :cowboy, :logger, :gettext, :httpotion,
                     :phoenix_ecto, :postgrex, :comeonin]]
   end
 
@@ -38,6 +38,8 @@ defmodule StarterProject.Mixfile do
      {:guardian, "~> 0.14"},
      {:comeonin, "~> 3.0"},
      {:cors_plug, "~> 1.2"},
+     {:httpotion, "~> 3.0.2"},
+     {:poison, "~> 2.2.0"},
      {:cowboy, "~> 1.0"}]
   end
 

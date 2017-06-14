@@ -16,6 +16,7 @@ defmodule StarterProject.Router do
 
     post "/auth/register", AuthController, :register
     post "/auth/login", AuthController, :login
+    post "/auth/google", AuthController, :google_auth
   end
 
   scope "/", StarterProject do
