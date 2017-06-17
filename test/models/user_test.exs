@@ -3,7 +3,7 @@ defmodule StarterProject.UserTest do
 
   alias StarterProject.User
 
-  @valid_attrs %{password: "some content", username: "some content"}
+  @valid_attrs %{email: "some@content", username: "some content"}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
