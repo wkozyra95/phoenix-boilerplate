@@ -1,4 +1,7 @@
 defmodule StarterProject.User do
+  @moduledoc """
+  This module defines struct and db schema for user account.
+  """
   use StarterProject.Web, :model
 
   schema "user" do
@@ -10,9 +13,18 @@ defmodule StarterProject.User do
     timestamps()
   end
 
+  @type t :: %StarterProject.User{
+    username:         String.t,
+    password:         String.t,
+    password_hash:    String.t,
+    email:            String.t,
+  }
+
   @doc """
   Builds a changeset based on the `struct` and `params`.
+  Required for validating data.
   """
+  @spec changeset(%StarterProject.User{}, map) :: Ecto.Changeset.t
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:username, :email])
@@ -22,6 +34,10 @@ defmodule StarterProject.User do
     |> unique_constraint(:username)
   end
 
+  @doc """
+  Builds a changeset based on the `struct` and `params`.
+  Required for validating data durring registration.
+  """
   def register_changeset(struct, params \\ %{}) do
     struct
     |> changeset(params)
@@ -31,6 +47,10 @@ defmodule StarterProject.User do
     |> hash_password
   end
 
+  @doc """
+  Builds a changeset based on the `struct` and `params`.
+  Required for validating dat durring password change.
+  """
   def change_password_changeset(struct, params \\ %{}) do
     struct
     |> changeset(params)
@@ -39,7 +59,6 @@ defmodule StarterProject.User do
     |> validate_length(:password, min: 8, max: 20)
   end
   
-  # TODO: refactor 
   def update_password(
       changeset, 
       %{ "newPassword" => new_password, "oldPassword" => old_password}
@@ -55,6 +74,7 @@ defmodule StarterProject.User do
       old_password,
       get_field(changeset, :password_hash)
     )
+
     case compare do
       true -> 
         changeset

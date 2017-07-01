@@ -5,7 +5,7 @@ defmodule StarterProject.GuardianHandler do
   def unauthenticated(conn, _params) do
     conn
     |> put_status(401)
-    |> text "Authentication required"
+    |> text("Authentication required")
   end
 end
 

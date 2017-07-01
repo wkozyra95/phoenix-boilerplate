@@ -40,6 +40,7 @@ defmodule StarterProject.Mixfile do
      {:cors_plug, "~> 1.2"},
      {:httpotion, "~> 3.0.2"},
      {:poison, "~> 2.2.0"},
+     {:ex_doc, "~> 0.14", only: :dev, runtime: false},
      {:cowboy, "~> 1.0"}]
   end
 
